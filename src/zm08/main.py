@@ -36,3 +36,9 @@ def lcm(x: int, y: int):
     """
     typer.echo(mathtools.lcm(x, y))
 
+@app.command()
+def is_prime(x):
+    """
+    Prime Number Test 
+    """
+    typer.echo(mathtools.is_prime(x))
