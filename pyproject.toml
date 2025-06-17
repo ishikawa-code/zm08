@@ -7,7 +7,8 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-zm08 = "zm08:main"
+zm08 = "zm08.main:app"
+
 
 [build-system]
 requires = ["hatchling"]
