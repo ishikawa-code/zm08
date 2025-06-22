@@ -41,3 +41,11 @@ def is_prime(x):
         
     return True
 
+def multiply(x, y):
+    return x * y
+
+for x in range(1, 10):
+    for y in range(1,10):
+        print(multiply(x,y), end=" ")
+        
+    print()

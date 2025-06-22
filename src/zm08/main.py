@@ -42,3 +42,10 @@ def is_prime(x):
     Prime Number Test 
     """
     typer.echo(mathtools.is_prime(x))
+
+@app.command()
+def multiply(x, y):
+    """
+    Multiplication Table 
+    """
+    typer.echo(mathtools.multiply(x, y))
