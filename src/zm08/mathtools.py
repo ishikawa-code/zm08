@@ -28,7 +28,7 @@ def divisors(x):
     return divs
 
 
-def is_prime(x):
+def is_prime(x:int):
     """素数判定"""
     if x == 1:
         return False
@@ -41,11 +41,7 @@ def is_prime(x):
         
     return True
 
-def multiply(x, y):
+def multiply(x:int, y:int):
     return x * y
 
-for x in range(1, 10):
-    for y in range(1,10):
-        print(multiply(x,y), end=" ")
-        
-    print()
+

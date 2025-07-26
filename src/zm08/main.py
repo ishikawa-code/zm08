@@ -1,8 +1,11 @@
+#main.py
 import datetime
 
 import typer
 from zm08 import mathtools
-
+from . import demo
+from zm08 import tracker
+from . import logic
 app = typer.Typer()
 
 
@@ -37,15 +40,42 @@ def lcm(x: int, y: int):
     typer.echo(mathtools.lcm(x, y))
 
 @app.command()
-def is_prime(x):
+def is_prime(x:int):
     """
     Prime Number Test 
     """
     typer.echo(mathtools.is_prime(x))
 
 @app.command()
-def multiply(x, y):
+def multiply(x:int, y:int):
     """
     Multiplication Table 
     """
     typer.echo(mathtools.multiply(x, y))
+
+
+@app.command()
+def hello(name:str="ken"):
+    typer.echo(demo.hello(name))
+
+
+
+
+
+@app.command()
+def run():
+    """
+    運動記録を記入・保存・集計するメイン機能
+    """
+    # 最初にペナルティチェックと目標更新を行う
+    logic.check_and_update_penalty()
+    
+    # 今日の記録を開始する
+    tracker.record_today()
+
+# 他のコマンドがあればここに追加...
+
+if __name__ == "__main__":
+    app()
+
+
