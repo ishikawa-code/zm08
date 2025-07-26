@@ -94,24 +94,31 @@ def check_and_update_penalty():
     save_config(new_config)
 
 def get_grace_message(today, achieved, required):
-    """達成状況に応じたステータスメッセージ（猶予日数など）を返す"""
+    """
+    達成状況に応じたステータスメッセージ（猶予日数など）を返す、最終確定版ロジック。
+    """
+    # 1. 必要な回数と、今日を含めた週の残り日数を計算
     needed = required - achieved
-    
-    if needed <= 0:
-        return "🎉目標達成！"
-    
-    today_weekday = today.weekday()
-    is_last_day = (today_weekday == 6)
+    today_weekday = today.weekday() # 月曜=0, 日曜=6
     days_left_including_today = (6 - today_weekday) + 1
 
+    # 2. 【最優先】目標を達成済みの場合は、即座に祝福メッセージを返す
+    if needed <= 0:
+        return "🎉目標達成！"
+
+    # 3. 【次に】達成が物理的に不可能な場合
     if needed > days_left_including_today:
         return "⚠️今週中の達成は不可能です"
-
-    if is_last_day and needed > 0:
+    
+    # 4. 【次に】今日が最終日（日曜日）で、まだ達成できていない場合
+    if today_weekday == 6: # is_last_day
         return "🔥今日が最終日です！"
 
+    # 5. 【上記以外】猶予日数を計算して返す
+    # 「猶予」= 日曜日までの残り日数
     days_left_until_sunday = 6 - today_weekday
     return f"猶予あと {days_left_until_sunday} 日"
+
 
 def show_current_status():
     """今週の達成状況と猶予日数を表示する"""
@@ -134,8 +141,7 @@ def show_current_status():
         achieved_count = sum(1 for row in this_week_data if row[params["index"]] == "○")
         required_count = params["required"]
         
+        # 正しくtodayを渡して、get_grace_messageを呼び出す
         status_text = get_grace_message(today, achieved_count, required_count)
         
         print(f"{exercise}: {achieved_count} / {required_count} 回 ({status_text})")
-
-
