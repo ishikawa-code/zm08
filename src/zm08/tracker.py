@@ -20,5 +20,5 @@ def record_today():
             writer.writerow(["日付", "ランニング", "ストレッチ1", "ストレッチ2"])
         writer.writerow([str(today), run, s1, s2])
 
-    print(f"\n記録を {logic.LOG_File} に保存しました。")
+    print(f"\n記録を {logic.LOG_FILE} に保存しました。")
     logic.show_current_status()
