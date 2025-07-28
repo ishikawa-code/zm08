@@ -6,7 +6,6 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "typer[all]>=0.12.3",
-    "openpyxl>=3.1.5"
 ]
 
 [project.scripts]
@@ -16,3 +15,9 @@ zm08 = "zm08.main:app"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build]
+exclude = [
+    "*.csv",
+    "*.json",
+]
