@@ -15,6 +15,15 @@ def callback():
     A Collection of Useful Commands
     """
 
+# --- 運動記録アプリのメインコマンド ---
+@app.command()
+def run():
+    """
+    運動記録を記入・保存・集計する。
+    """
+    logic.check_and_update_penalty()
+    tracker.record_today()
+
 
 @app.command()
 def now():
@@ -62,16 +71,7 @@ def hello(name:str="ken"):
 
 
 
-@app.command()
-def run():
-    """
-    運動記録を記入・保存・集計するメイン機能
-    """
-    # 最初にペナルティチェックと目標更新を行う
-    logic.check_and_update_penalty()
-    
-    # 今日の記録を開始する
-    tracker.record_today()
+
 
 # 他のコマンドがあればここに追加...
 
